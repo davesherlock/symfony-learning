@@ -9,7 +9,5 @@
 /vendor/
 ###< symfony/framework-bundle ###
 /node_modules/
-/vendor
-/.idea
-/.lnk
+/.idea/
 /public/build/
