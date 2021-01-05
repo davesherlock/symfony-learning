@@ -23,7 +23,7 @@
 
         /**
          * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="videos")
-         * @ORM\JoinColumn(nullable=true)
+         * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
          */
         private $user;
 
