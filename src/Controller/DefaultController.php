@@ -1,46 +1,43 @@
 <?php
 // src/Controller/DefaultController.php
-namespace App\Controller;
+    namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
-use App\Entity\Video;
-use App\Entity\Address;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\Routing\Annotation\Route;
+    use App\Entity\User;
+    use App\Entity\Video;
+    use App\Entity\Address;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
+    class DefaultController extends AbstractController {
 
-class DefaultController extends AbstractController
-{
+        /**
+         * @Route("/home", name="default", name="home")
+         */
+        public function index(Request $request) {
 
-    /**
-     * @Route("/home", name="default", name="home")
-     */
-    public function index(Request $request)
-    {
-//        $entityManager = $this->getDoctrine()->getManager();
+            $cache = new FilesystemAdapter();
+            $posts = $cache->getItem('database.get_posts');
 
-        // $user = new User();
-        // $user->setName('Robert');
+            if (!$posts->isHit()) {
+                $post_from_db = ['post 1', 'post 2', 'post 3'];
 
-        // for($i=1; $i<=3; $i++)
-        // {
-        //     $video = new Video();
-        //     $video->setTitle('Video title -'. $i);
-        //     $user->addVideo($video);
-        //     $entityManager->persist($video);
-        // }
+                dump('connected with database ...');
 
-        // $entityManager->persist($user);
-        // $entityManager->flush();
+                $posts->set(serialize($post_from_db));
+                $posts->expiresAfter(5);
+                $cache->save($posts);
+            }
 
-//        $user = $entityManager->getRepository(User::class)->findWithVideos(1);
-//        dump($user);
+            //$cache->deleteItem('database.get_posts');
+            //$cache->clear();
+            dump(unserialize($posts->get()));
 
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController'
-        ]);
-    }  
-    
-}
+            return $this->render('default/index.html.twig', [
+                'controller_name' => 'DefaultController',
+            ]);
+        }
+
+    }

@@ -78,6 +78,18 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.2"
+    },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },
@@ -176,6 +188,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
+    },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.1.10"
     },
     "symfony/requirements-checker": {
         "version": "2.0",
