@@ -27,6 +27,11 @@
          */
         private $user;
 
+        /**
+         * @ORM\ManyToOne(targetEntity=SecurityUser::class, inversedBy="videos")
+         */
+        private $securityUser;
+
         public function getId(): ?int
         {
             return $this->id;
@@ -52,6 +57,18 @@
         public function setUser(?User $user): self
         {
             $this->user = $user;
+
+            return $this;
+        }
+
+        public function getSecurityUser(): ?SecurityUser
+        {
+            return $this->securityUser;
+        }
+
+        public function setSecurityUser(?SecurityUser $securityUser): self
+        {
+            $this->securityUser = $securityUser;
 
             return $this;
         }
