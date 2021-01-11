@@ -26,6 +26,19 @@
 
 
         {{ app.request.get('param') }}
+
+        {% trans %}
+            symfony jest super
+        {% endtrans %}
+
+
+
+
+        <div>{{ 'some.key'|trans|raw }}</div>
+
+
+
+
     </div>
 
 
